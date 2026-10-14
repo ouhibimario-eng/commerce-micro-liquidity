@@ -1,4 +1,4 @@
-
+0
 #![no_std]
 
 use soroban_sdk::{
@@ -66,3 +66,5 @@ impl MicroLiquidityPool {
             .ok_or(PoolError::NotInitialized)
     }
 }
+#[cfg(test)]
+mod test;
