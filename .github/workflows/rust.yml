@@ -1,0 +1,28 @@
+name: Soroban Smart Contract CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust Toolchain and Wasm Target
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Build Soroban Contract
+        run: cargo build --target wasm32-unknown-unknown --release
+
+      - name: Run Tests
+        run: cargo test
